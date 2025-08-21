@@ -19,7 +19,6 @@ function HomePage() {
             </p>
 
             <div className="mt-4 flex justify-center gap-4 sm:mt-6">
-              \
               {/* TODO: Redirect to register or dashboard based on if logged in. */}
               <Link
                 to={"/register"}
