@@ -1,8 +1,4 @@
-# **📦 Parcel Delivery Frontend (React + Redux Toolkit + RTK Query)**
-
----
-
-## **Project Overview**
+# **Project Overview**
 
 Build a **secure, role-based, and user-friendly** frontend application for a **Parcel Delivery System** (similar to Pathao Courier or Sundarban) using **React.js**, **Redux Toolkit**, and **RTK Query**.
 
@@ -10,13 +6,11 @@ This app will consume the backend Parcel Delivery API to enable **Senders**, **R
 
 You will create:
 
-- A **public landing page** with basic service info
 - A **role-based dashboard interface** with tailored features for each user type
 - Robust **state management and API integration** via Redux Toolkit & RTK Query
 - Responsive and clean UI
 
 ---
-
 
 ## **📌 Minimum Functional Requirements**
 
