@@ -1,69 +1,126 @@
-# React + TypeScript + Vite
+# **📦 Parcel Delivery Frontend (React + Redux Toolkit + RTK Query)**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+## **Project Overview**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Build a **secure, role-based, and user-friendly** frontend application for a **Parcel Delivery System** (similar to Pathao Courier or Sundarban) using **React.js**, **Redux Toolkit**, and **RTK Query**.
 
-## Expanding the ESLint configuration
+This app will consume the backend Parcel Delivery API to enable **Senders**, **Receivers**, and **Admins** to perform parcel operations and manage records seamlessly.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+You will create:
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- A **public landing page** with basic service info
+- A **role-based dashboard interface** with tailored features for each user type
+- Robust **state management and API integration** via Redux Toolkit & RTK Query
+- Responsive and clean UI
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## **📌 Minimum Functional Requirements**
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### **1️⃣ Public Landing Section**
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **Home Page —** Landing page introducing the parcel delivery service
+- **About Page —** Service description, mission, and team info
+- **Contact Page —** Inquiry form (simulated submission)
+
+---
+
+### **2️⃣ Authentication**
+
+- Login form with JWT-based authentication
+- Registration form with role selection (**Sender** or **Receiver**)
+- Role-based redirection after login
+- Persisted authentication state (remains logged in after refresh)
+- Logout functionality
+
+---
+
+### **3️⃣ Sender Dashboard**
+
+- Create parcel delivery requests
+- Cancel parcel (if not dispatched)
+- View all created parcels and their status logs
+
+---
+
+### **4️⃣ Receiver Dashboard**
+
+- View incoming parcels
+- Confirm parcel delivery
+- View delivery history
+
+---
+
+### **5️⃣ Admin Dashboard**
+
+- View and manage all users (block/unblock)
+- View and manage all parcels (block/unblock, update delivery status)
+- Assign delivery personnel (optional)
+
+---
+
+### **6️⃣ Parcel Tracking**
+
+- Each parcel has a **unique tracking ID**
+- Public or authenticated users can search parcels by tracking ID
+- Parcel details include **status logs** (status, timestamp, updatedBy, note)
+
+---
+
+### **7️⃣ General Features**
+
+- **Role-based navigation menu** (different for each role)
+- **Loading indicators** and **global error handling**
+- **Form validations** (required fields, numeric checks, positive amounts)  and adnvanced filtering.
+- **Pagination** for long lists
+- **Toast Notifications**
+  
+  - Show success/error messages with any toast package/library
+  - Makes UI feedback snappy
+  
+- **Dashboard & Data Visualization**
+  - **Overview Cards:** Total parcels, Delivered, In Transit, Pending/Cancelled.  
+  - **Charts:** Bar/pie charts showing parcel trends, delivery status distribution, and monthly shipments.  
+  - **Parcel Table:** Paginated, searchable, and filterable table with actions (View, Cancel, Confirm).  
+  - **Status Timeline:** Visual history of parcel updates with timestamps and notes.  
+  - **Role-Specific Views:** Sender sees their parcels, Receiver sees received parcels, Admin sees all.  
+  - **Responsive Design:** Fully responsive with consistent margins, spacing, typography, and color contrast.
+
+- **UI/UX Considerations:**
+  
+  - Fully responsive design for all devices
+    - Maintain consistent margins, spacing, and clean typography
+    - Clear theme and accessible color contrasts
+    - Performance improvements via lazy-loading or skeleton loaders
+    - Avoid placeholder text; use real or realistic data for a professional finish
+
+---
+
+## **Submission Guidelines**
+
+1. **Codebase**
+    - Submit a clean, modular, and documented codebase
+    - Follow best practices for reusable components
+    - Include a **README** with:
+        - Project overview
+        - Setup instructions
+        - Technology stack
+        - Live URL (if deployed)
+        - Any other relevant notes
+2. **GitHub Repository**
+    - Separate repositories for Frontend and Backend.
+    - Commit history showing development progress (minimum 10 meaningful commit messages for each frontend and backend repo; otherwise, you will get 0).
+3. **Live Deployment**
+    - Provide live deployment URLs for both frontend and backend
+4. **Demo Video**
+
+A short video (5–10 minutes) showing:
+
+- Show authentication flow and dashboards for **Sender, Receiver, Admin**
+- Demonstrate parcel creation, cancellation, delivery confirmation, and admin management
+  
+1. **Credentials**
+    - Provide admin/sender/receiver login details (email & password) for testing

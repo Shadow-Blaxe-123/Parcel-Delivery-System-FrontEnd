@@ -1,132 +1,107 @@
 // app/about/page.tsx
 
+import image from "@/assets/img.jpg";
 import { Separator } from "@/components/ui/separator";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 
 export default function AboutPage() {
   return (
-    <div className="flex justify-center">
-      <div className="container max-w-4xl py-10 space-y-10 ">
-        <div>
-          <h1 className="text-4xl font-bold tracking-tight">
-            About the Parcel Delivery System
-          </h1>
-          <p className="mt-4 text-muted-foreground text-lg">
-            A secure, role-based, and user-friendly frontend built for modern
-            parcel logistics. Inspired by services like{" "}
-            <strong>Pathao Courier</strong> and <strong>Sundarban</strong>, our
-            system allows seamless interaction between Senders, Receivers, and
-            Admins.
+    <div className="max-w-4xl mx-auto px-6 py-16 space-y-10">
+      <div className="space-y-4">
+        <h1 className="text-4xl font-bold tracking-tight">About Swift</h1>
+        <p className="text-muted-foreground text-lg">
+          Swift is a secure, modern parcel delivery system built to simplify
+          logistics for Senders, Receivers, and Admins. Inspired by platforms
+          like Pathao Courier and Sundarban, we provide a seamless, role-based
+          dashboard experience — all powered by real-time API integration.
+        </p>
+      </div>
+
+      <Separator />
+
+      <section className="py-16">
+        <div className="container space-y-6 text-center">
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+            Transforming Parcel Delivery with Smart Logistics
+          </h2>
+          <p className="max-w-2xl mx-auto text-muted-foreground">
+            Our Parcel Delivery System is designed to simplify the way parcels
+            are sent, tracked, and received. Whether you're a small business or
+            an individual, we provide a seamless, real-time experience powered
+            by modern technology. Built with secure authentication and
+            intelligent workflows, we bring reliability to your doorstep.
           </p>
         </div>
+      </section>
 
-        <Separator />
+      <Separator />
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Core Features</h2>
-          <ul className="list-disc list-inside space-y-2 text-muted-foreground">
-            <li>
-              🧑‍🤝‍🧑 <strong>Role-based dashboards</strong> tailored for Senders,
-              Receivers, and Admins.
-            </li>
-            <li>
-              ⚡ <strong>Real-time API</strong> integration with Redux Toolkit &
-              RTK Query.
-            </li>
-            <li>
-              🎯 <strong>Unique parcel tracking ID</strong> for public &
-              authenticated users.
-            </li>
-            <li>
-              📱 <strong>Responsive UI</strong> built with ShadCN + Tailwind.
-            </li>
-            <li>
-              🛡️ <strong>Secure authentication</strong> with protected routes
-              and state management.
-            </li>
-          </ul>
-        </section>
-
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">
-            User Roles & Capabilities
+      <section className="bg-muted py-16">
+        <div className="container space-y-6 text-center">
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+            Our Mission
           </h2>
+          <p className="max-w-2xl mx-auto text-muted-foreground">
+            To revolutionize parcel delivery in emerging markets by making it
+            accessible, trackable, and secure — empowering users with the tools
+            to manage every delivery confidently. We aim to provide a trusted
+            platform that bridges senders, receivers, and admins through
+            transparency and efficiency.
+          </p>
+        </div>
+      </section>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Badge variant="outline">Sender</Badge> Dashboard
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="text-muted-foreground space-y-2">
-                <p>📦 Create parcel delivery requests</p>
-                <p>❌ Cancel parcels before dispatch</p>
-                <p>📊 Track all created parcels & their statuses</p>
-              </CardContent>
-            </Card>
+      <Separator />
 
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Badge variant="outline">Receiver</Badge> Dashboard
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="text-muted-foreground space-y-2">
-                <p>📥 View incoming parcels</p>
-                <p>✅ Confirm delivery</p>
-                <p>📁 View delivery history</p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Badge variant="outline">Admin</Badge> Dashboard
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="text-muted-foreground space-y-2">
-                <p>👥 Manage users (block/unblock)</p>
-                <p>📦 Oversee all parcels & statuses</p>
-                <p>🧑‍🔧 Assign delivery personnel (optional)</p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Badge variant="outline">Public</Badge> Parcel Tracking
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="text-muted-foreground space-y-2">
-                <p>🔍 Track parcels using unique tracking ID</p>
-                <p>📝 View status logs with timestamps & notes</p>
-              </CardContent>
-            </Card>
+      <section className="py-16">
+        <div className="container space-y-10 text-center">
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+            Meet the Team
+          </h2>
+          <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {[
+              {
+                name: "Shamyun Ahmed",
+                role: "Frontend Engineer",
+                img: image,
+              },
+              {
+                name: "Shamyun Ahmed",
+                role: "Backend Architect",
+                img: image,
+              },
+              {
+                name: "Shamyun Ahmed",
+                role: "UX Designer",
+                img: image,
+              },
+            ].map((member, i) => (
+              <div key={i} className="space-y-3">
+                <img
+                  src={member.img}
+                  alt={member.name}
+                  className="mx-auto h-24 w-24 rounded-full object-cover border"
+                />
+                <div className="text-lg font-semibold">{member.name}</div>
+                <div className="text-sm text-muted-foreground">
+                  {member.role}
+                </div>
+              </div>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        <Separator />
+      <Separator />
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Tech Stack</h2>
-          <div className="text-muted-foreground space-y-1">
-            <p>
-              💻 <strong>Frontend:</strong> React.js + Next.js + ShadCN UI
-            </p>
-            <p>
-              ⚙️ <strong>State Management:</strong> Redux Toolkit + RTK Query
-            </p>
-            <p>
-              🎨 <strong>Styling:</strong> Tailwind CSS + Dark Mode Support
-            </p>
-            <p>
-              🔐 <strong>Auth & Access:</strong> Role-based routing + JWT
-            </p>
-          </div>
-        </section>
-      </div>
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">Why Choose SwiftParcel?</h2>
+        <p className="text-muted-foreground">
+          Whether you're a small business, a regular sender, or managing a
+          logistics operation — SwiftParcel gives you the control, visibility,
+          and reliability you need to streamline deliveries and ensure parcels
+          reach their destination safely and efficiently.
+        </p>
+      </section>
     </div>
   );
 }
