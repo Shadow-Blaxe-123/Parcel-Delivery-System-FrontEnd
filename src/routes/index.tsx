@@ -1,4 +1,5 @@
 import App from "@/App";
+import Register from "@/pages/Auth/Register";
 import HomePage from "@/pages/Public/HomePage";
 import { createBrowserRouter } from "react-router";
 
@@ -12,5 +13,9 @@ export const router = createBrowserRouter([
         index: true,
       },
     ],
+  },
+  {
+    Component: Register,
+    path: "/register",
   },
 ]);
