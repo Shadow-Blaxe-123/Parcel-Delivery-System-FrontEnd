@@ -5,8 +5,14 @@ import { Footer } from "./Footer";
 function PublicLayout({ children }: { children: ReactNode }) {
   return (
     <div>
-      <Navigation />
-      {children}
+      {/* Sticky, semi-transparent, blurred navbar */}
+      <div className="sticky top-0 z-50 backdrop-blur bg-background/70 border-b">
+        <Navigation />
+      </div>
+
+      {/* Content goes behind navbar on scroll */}
+      <main className="-mt-[1px]">{children}</main>
+
       <Footer />
     </div>
   );

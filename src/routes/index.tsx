@@ -1,6 +1,7 @@
 import App from "@/App";
 import Register from "@/pages/Auth/Register";
-import HomePage from "@/pages/Public/HomePage";
+import AboutPage from "@/pages/Public/About";
+import HomePage from "@/pages/Public/Home";
 import { createBrowserRouter } from "react-router";
 
 export const router = createBrowserRouter([
@@ -11,6 +12,10 @@ export const router = createBrowserRouter([
       {
         Component: HomePage,
         index: true,
+      },
+      {
+        Component: AboutPage,
+        path: "about",
       },
     ],
   },
