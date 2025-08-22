@@ -13,3 +13,8 @@ export interface IResponse<T> {
   message: string;
   data: T;
 }
+export interface IError {
+  statusCode: number;
+  success: boolean;
+  message: string;
+}

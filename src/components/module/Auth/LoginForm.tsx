@@ -24,6 +24,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "./authSchema";
 import { toast } from "sonner";
 import { useLoginMutation } from "@/store/api/auth.api";
+import type { IError } from "@/types";
 
 function LoginForm() {
   const [login] = useLoginMutation();
@@ -44,6 +45,7 @@ function LoginForm() {
       navigate("/");
     } catch (error) {
       console.log(error);
+      toast.error((error as IError)?.message || "Something went wrong");
     }
   };
 
