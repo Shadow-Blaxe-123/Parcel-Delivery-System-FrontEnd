@@ -102,7 +102,7 @@ export default function Navigation() {
         {/* Right side */}
         <div className="flex items-center gap-2">
           <Button asChild size="sm" className="text-sm">
-            <Link to="/sign-in">Log In</Link>
+            <Link to="/login">Log In</Link>
           </Button>
           <ModeToggle />
         </div>
