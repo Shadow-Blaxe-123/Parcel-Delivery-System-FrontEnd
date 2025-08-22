@@ -17,11 +17,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useForm, type FieldErrors } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Link } from "react-router";
 import type z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "./authSchema";
+import { toast } from "sonner";
 
 function LoginForm() {
   const form = useForm<z.infer<typeof loginSchema>>({
@@ -33,19 +34,7 @@ function LoginForm() {
   });
   const onSubmit = (data: z.infer<typeof loginSchema>) => {
     console.log(data);
-  };
-  const onError = (errors: FieldErrors) => {
-    const passwordErrors = errors.password;
-
-    if (passwordErrors) {
-      const messages = Array.isArray(passwordErrors.types)
-        ? passwordErrors.types
-        : [passwordErrors.message];
-
-      messages.forEach((msg) => {
-        toast.error(msg);
-      });
-    }
+    toast.success("Login successful");
   };
 
   return (
@@ -57,7 +46,7 @@ function LoginForm() {
         <div className="grid gap-6">
           <Form {...form}>
             <form
-              onSubmit={form.handleSubmit(onSubmit, onError)}
+              onSubmit={form.handleSubmit(onSubmit)}
               className="grid gap-6"
               id="login-form"
             >
