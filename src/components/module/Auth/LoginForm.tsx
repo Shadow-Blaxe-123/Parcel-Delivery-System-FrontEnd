@@ -17,14 +17,37 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useForm } from "react-hook-form";
+import { useForm, type FieldErrors } from "react-hook-form";
 import { Link } from "react-router";
+import type z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginSchema } from "./authSchema";
 
 function LoginForm() {
-  const form = useForm();
-  const onSubmit = (params: unknown) => {
-    console.log(params);
+  const form = useForm<z.infer<typeof loginSchema>>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+  const onSubmit = (data: z.infer<typeof loginSchema>) => {
+    console.log(data);
   };
+  const onError = (errors: FieldErrors) => {
+    const passwordErrors = errors.password;
+
+    if (passwordErrors) {
+      const messages = Array.isArray(passwordErrors.types)
+        ? passwordErrors.types
+        : [passwordErrors.message];
+
+      messages.forEach((msg) => {
+        toast.error(msg);
+      });
+    }
+  };
+
   return (
     <Card className="w-full max-w-sm">
       <CardHeader>
@@ -34,7 +57,7 @@ function LoginForm() {
         <div className="grid gap-6">
           <Form {...form}>
             <form
-              onSubmit={form.handleSubmit(onSubmit)}
+              onSubmit={form.handleSubmit(onSubmit, onError)}
               className="grid gap-6"
               id="login-form"
             >
