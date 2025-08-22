@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/popover";
 import { ModeToggle } from "./ModeToggle";
 import { Link } from "react-router";
+import { useGetMeQuery } from "@/store/api/auth.api";
 
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
@@ -23,6 +24,8 @@ const navigationLinks = [
 ];
 
 export default function Navigation() {
+  const { data } = useGetMeQuery(undefined);
+  console.log(data);
   return (
     <header className="border-b px-4 md:px-6 border-primary/70">
       <div className="flex h-16 items-center justify-between gap-4">
@@ -103,6 +106,9 @@ export default function Navigation() {
         <div className="flex items-center gap-2">
           <Button asChild size="sm" className="text-sm">
             <Link to="/login">Log In</Link>
+          </Button>
+          <Button asChild size="sm" className="text-sm" variant={"outline"}>
+            <Link to="/logout">Log Out</Link>
           </Button>
           <ModeToggle />
         </div>
