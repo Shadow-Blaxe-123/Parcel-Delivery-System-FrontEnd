@@ -18,13 +18,16 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import type z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "./authSchema";
 import { toast } from "sonner";
+import { useLoginMutation } from "@/store/api/auth.api";
 
 function LoginForm() {
+  const [login] = useLoginMutation();
+  const navigate = useNavigate();
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -32,9 +35,16 @@ function LoginForm() {
       password: "",
     },
   });
-  const onSubmit = (data: z.infer<typeof loginSchema>) => {
-    console.log(data);
-    toast.success("Login successful");
+  const onSubmit = async (data: z.infer<typeof loginSchema>) => {
+    try {
+      console.log(data);
+      const res = await login(data);
+      console.log(res);
+      toast.success("Login successful");
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
