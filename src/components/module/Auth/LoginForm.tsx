@@ -1,6 +1,13 @@
 import Password from "@/components/module/Auth/Password";
 import { Button } from "@/components/ui/button";
 import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
   Form,
   FormControl,
   FormDescription,
@@ -10,31 +17,27 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import config from "@/config";
-import { cn } from "@/lib/utils";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router";
 
-function LoginForm({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) {
+function LoginForm() {
   const form = useForm();
   const onSubmit = (params: unknown) => {
     console.log(params);
   };
   return (
-    <div>
-      <div className={cn("flex flex-col gap-6", className)} {...props}>
-        <div className="flex flex-col items-center gap-2 text-center">
-          <h1 className="text-2xl font-bold">Login to your account</h1>
-          <p className="text-muted-foreground text-sm text-balance">
-            Enter your email below to login to your account
-          </p>
-        </div>
+    <Card className="w-full max-w-sm">
+      <CardHeader>
+        <CardTitle>Login to your account</CardTitle>
+      </CardHeader>
+      <CardContent>
         <div className="grid gap-6">
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-6">
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="grid gap-6"
+              id="login-form"
+            >
               <FormField
                 control={form.control}
                 name="email"
@@ -71,37 +74,23 @@ function LoginForm({
                   </FormItem>
                 )}
               />
-
-              <Button type="submit" className="w-full">
-                Log in
-              </Button>
             </form>
           </Form>
         </div>
-        <div>
-          <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
-            <span className="bg-background text-muted-foreground relative z-10 px-2">
-              Or continue with
-            </span>
-          </div>
-          <Button
-            variant="outline"
-            className="w-full"
-            onClick={() => {
-              window.open(`${config.baseUrl}/auth/google`);
-            }}
-          >
-            Login with Google
-          </Button>
-        </div>
+      </CardContent>
+      <CardFooter className="flex-col gap-2">
+        <Button type="submit" className="w-full" form="login-form">
+          Login
+        </Button>
+
         <div className="text-center text-sm">
           Don&apos;t have an account?{" "}
           <Link to={"/register"} className="underline underline-offset-4">
             Register
           </Link>
         </div>
-      </div>
-    </div>
+      </CardFooter>
+    </Card>
   );
 }
 export default LoginForm;
