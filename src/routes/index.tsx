@@ -1,4 +1,5 @@
 import App from "@/App";
+import DashBoard from "@/components/layout/DashBoard";
 import Login from "@/pages/Auth/Login";
 import Register from "@/pages/Auth/Register";
 import AboutPage from "@/pages/Public/About";
@@ -27,5 +28,9 @@ export const router = createBrowserRouter([
   {
     Component: Login,
     path: "/login",
+  },
+  {
+    Component: DashBoard,
+    path: "/dashboard",
   },
 ]);

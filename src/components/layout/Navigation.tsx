@@ -16,6 +16,8 @@ import { Link } from "react-router";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { useLogoutMutation } from "@/store/api/auth.api";
 import { logout } from "@/store/slice/auth.slice";
+import { toast } from "sonner";
+import type { IError } from "@/types";
 
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
@@ -30,9 +32,16 @@ export default function Navigation() {
   const authState = useAppSelector((state) => state.auth);
   const [logoutMutation] = useLogoutMutation();
 
-  const handleLogout = () => {
-    logoutMutation(null);
-    dispatch(logout());
+  const handleLogout = async () => {
+    try {
+      const toastId = toast.loading("Logging out...");
+      await logoutMutation(null);
+      toast.success("Logout successful", { id: toastId });
+      dispatch(logout());
+    } catch (error) {
+      console.log(error);
+      toast.error((error as IError)?.message || "Something went wrong");
+    }
   };
 
   return (

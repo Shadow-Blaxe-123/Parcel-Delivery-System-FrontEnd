@@ -16,19 +16,13 @@ You will create:
 
 ### **1️⃣ Public Landing Section**
 
-- **Home Page —** Landing page introducing the parcel delivery service
-- **About Page —** Service description, mission, and team info
 - **Contact Page —** Inquiry form (simulated submission)
 
 ---
 
 ### **2️⃣ Authentication**
 
-- Login form with JWT-based authentication
 - Registration form with role selection (**Sender** or **Receiver**)
-- Role-based redirection after login
-- Persisted authentication state (remains logged in after refresh)
-- Logout functionality
 
 ---
 

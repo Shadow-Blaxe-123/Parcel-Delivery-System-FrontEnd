@@ -42,11 +42,12 @@ function LoginForm() {
   const onSubmit = async (data: z.infer<typeof loginSchema>) => {
     try {
       console.log(data);
+      const toastId = toast.loading("Logging in...");
       const res = await loginMutation(data).unwrap();
       console.log(res);
-      toast.success("Login successful");
+      toast.success("Login successful", { id: toastId });
       dispatch(login(res.data.user));
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       console.log(error);
       toast.error((error as IError)?.message || "Something went wrong");
