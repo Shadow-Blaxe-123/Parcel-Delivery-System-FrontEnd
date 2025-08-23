@@ -1,10 +1,4 @@
-# **Project Overview**
-
-Build a **secure, role-based, and user-friendly** frontend application for a **Parcel Delivery System** (similar to Pathao Courier or Sundarban) using **React.js**, **Redux Toolkit**, and **RTK Query**.
-
-This app will consume the backend Parcel Delivery API to enable **Senders**, **Receivers**, and **Admins** to perform parcel operations and manage records seamlessly.
-
-You will create:
+# You will create
 
 - A **role-based dashboard interface** with tailored features for each user type
 - Robust **state management and API integration** via Redux Toolkit & RTK Query
@@ -17,12 +11,6 @@ You will create:
 ### **1️⃣ Public Landing Section**
 
 - **Contact Page —** Inquiry form (simulated submission)
-
----
-
-### **2️⃣ Authentication**
-
-- Registration form with role selection (**Sender** or **Receiver**)
 
 ---
 
@@ -46,8 +34,7 @@ You will create:
 
 - View and manage all users (block/unblock)
 - View and manage all parcels (block/unblock, update delivery status)
-- Assign delivery personnel (optional)
-
+  
 ---
 
 ### **6️⃣ Parcel Tracking**
@@ -79,11 +66,7 @@ You will create:
 
 - **UI/UX Considerations:**
   
-  - Fully responsive design for all devices
-    - Maintain consistent margins, spacing, and clean typography
-    - Clear theme and accessible color contrasts
-    - Performance improvements via lazy-loading or skeleton loaders
-    - Avoid placeholder text; use real or realistic data for a professional finish
+  - Performance improvements via lazy-loading or skeleton loaders
 
 ---
 
@@ -98,12 +81,10 @@ You will create:
         - Technology stack
         - Live URL (if deployed)
         - Any other relevant notes
-2. **GitHub Repository**
-    - Separate repositories for Frontend and Backend.
-    - Commit history showing development progress (minimum 10 meaningful commit messages for each frontend and backend repo; otherwise, you will get 0).
-3. **Live Deployment**
+
+2. **Live Deployment**
     - Provide live deployment URLs for both frontend and backend
-4. **Demo Video**
+3. **Demo Video**
 
 A short video (5–10 minutes) showing:
 

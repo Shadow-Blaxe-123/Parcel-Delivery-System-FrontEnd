@@ -6,6 +6,7 @@ import Register from "@/pages/Auth/Register";
 import Unauthorised from "@/pages/Auth/Unauthorised";
 import AboutPage from "@/pages/Public/About";
 import HomePage from "@/pages/Public/Home";
+import ParcelStatus from "@/pages/Reciever/ParcelStatus";
 import { withAuth } from "@/utils/authCheck";
 import { createBrowserRouter, Navigate } from "react-router";
 
@@ -67,6 +68,10 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <Navigate to="/receiver/parcelStatus" />,
+      },
+      {
+        Component: ParcelStatus,
+        path: "parcelStatus",
       },
     ],
   },

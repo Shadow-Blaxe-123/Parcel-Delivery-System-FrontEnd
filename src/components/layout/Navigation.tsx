@@ -90,8 +90,8 @@ export default function Navigation() {
               <NavigationMenu className="max-w-none *:w-full">
                 <NavigationMenuList className="flex-col items-start gap-0 md:gap-2">
                   {navigationLinks.map((link, index) => (
-                    <NavigationMenuItem key={index} className="w-full" asChild>
-                      <NavigationMenuLink className="py-1.5">
+                    <NavigationMenuItem key={index} className="w-full">
+                      <NavigationMenuLink className="py-1.5" asChild>
                         <Link to={link.href}>{link.label}</Link>
                       </NavigationMenuLink>
                     </NavigationMenuItem>
