@@ -1,12 +1,13 @@
 import App from "@/App";
 import DashBoard from "@/components/layout/DashBoard";
+import AllUsers from "@/pages/Admin/AllUsers";
 import Login from "@/pages/Auth/Login";
 import Register from "@/pages/Auth/Register";
 import Unauthorised from "@/pages/Auth/Unauthorised";
 import AboutPage from "@/pages/Public/About";
 import HomePage from "@/pages/Public/Home";
 import { withAuth } from "@/utils/authCheck";
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter, Navigate } from "react-router";
 
 export const router = createBrowserRouter([
   {
@@ -41,7 +42,31 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <div>Dashboard</div>,
+        element: <Navigate to="/admin/users" />,
+      },
+      {
+        path: "users",
+        Component: AllUsers,
+      },
+    ],
+  },
+  {
+    Component: withAuth(DashBoard, "SENDER"),
+    path: "/sender",
+    children: [
+      {
+        index: true,
+        element: <Navigate to="/sender/createParcel" />,
+      },
+    ],
+  },
+  {
+    Component: withAuth(DashBoard, "RECEIVER"),
+    path: "/receiver",
+    children: [
+      {
+        index: true,
+        element: <Navigate to="/receiver/parcelStatus" />,
       },
     ],
   },

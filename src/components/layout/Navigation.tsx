@@ -17,20 +17,22 @@ import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { useLogoutMutation } from "@/store/api/auth.api";
 import { logout } from "@/store/slice/auth.slice";
 import { toast } from "sonner";
-import type { IError } from "@/types";
+import type { IError, TRole } from "@/types";
+import redirectByRole from "@/utils/redirectByRole";
 
 // Navigation links array to be used in both desktop and mobile menus
-const navigationLinks = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
-  { href: "/dashboard", label: "Dashboard" },
-];
 
 export default function Navigation() {
   const dispatch = useAppDispatch();
   const authState = useAppSelector((state) => state.auth);
   const [logoutMutation] = useLogoutMutation();
+  const dashboard = redirectByRole(authState.user?.role as TRole);
+  const navigationLinks = [
+    { href: "/", label: "Home" },
+    { href: "/about", label: "About" },
+    { href: "/contact", label: "Contact" },
+    { href: dashboard, label: "Dashboard" },
+  ];
 
   const handleLogout = async () => {
     try {

@@ -1,8 +1,10 @@
 import { useAppSelector } from "@/hooks/redux";
+import type { TRole } from "@/types";
+import redirectByRole from "@/utils/redirectByRole";
 import { Link } from "react-router";
 
 function HomePage() {
-  const isLoggedIn = useAppSelector((state) => state.auth.isloggedIn);
+  const auth = useAppSelector((state) => state.auth);
 
   return (
     <div>
@@ -24,7 +26,11 @@ function HomePage() {
             <div className="mt-4 flex justify-center gap-4 sm:mt-6">
               {/* TODO: Redirect to register or dashboard based on if logged in. */}
               <Link
-                to={isLoggedIn ? "/dashboard" : "/login"}
+                to={
+                  auth.isloggedIn
+                    ? redirectByRole(auth.user?.role as TRole)
+                    : "/login"
+                }
                 className="inline-block rounded border border-primary bg-primary/80 px-5 py-3 font-medium text-foreground shadow-sm transition-colors hover:bg-primary"
               >
                 Get Started
