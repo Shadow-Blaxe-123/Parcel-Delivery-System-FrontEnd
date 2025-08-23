@@ -25,9 +25,12 @@ import { loginSchema } from "./authSchema";
 import { toast } from "sonner";
 import { useLoginMutation } from "@/store/api/auth.api";
 import type { IError } from "@/types";
+import { useAppDispatch } from "@/hooks/redux";
+import { login } from "@/store/slice/auth.slice";
 
 function LoginForm() {
-  const [login] = useLoginMutation();
+  const dispatch = useAppDispatch();
+  const [loginMutation] = useLoginMutation();
   const navigate = useNavigate();
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -39,9 +42,10 @@ function LoginForm() {
   const onSubmit = async (data: z.infer<typeof loginSchema>) => {
     try {
       console.log(data);
-      const res = await login(data);
+      const res = await loginMutation(data).unwrap();
       console.log(res);
       toast.success("Login successful");
+      dispatch(login(res.data.user));
       navigate("/");
     } catch (error) {
       console.log(error);
