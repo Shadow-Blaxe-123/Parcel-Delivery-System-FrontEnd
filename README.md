@@ -1,10 +1,7 @@
 # You will create
 
 - A **role-based dashboard interface** with tailored features for each user type
-- Robust **state management and API integration** via Redux Toolkit & RTK Query
 - Responsive and clean UI
-
----
 
 ## **📌 Minimum Functional Requirements**
 
@@ -12,15 +9,11 @@
 
 - **Contact Page —** Inquiry form (simulated submission)
 
----
-
 ### **3️⃣ Sender Dashboard**
 
 - Create parcel delivery requests
 - Cancel parcel (if not dispatched)
 - View all created parcels and their status logs
-
----
 
 ### **4️⃣ Receiver Dashboard**
 
@@ -28,22 +21,16 @@
 - Confirm parcel delivery
 - View delivery history
 
----
-
 ### **5️⃣ Admin Dashboard**
 
 - View and manage all users (block/unblock)
 - View and manage all parcels (block/unblock, update delivery status)
   
----
-
 ### **6️⃣ Parcel Tracking**
 
 - Each parcel has a **unique tracking ID**
 - Public or authenticated users can search parcels by tracking ID
 - Parcel details include **status logs** (status, timestamp, updatedBy, note)
-
----
 
 ### **7️⃣ General Features**
 
@@ -51,6 +38,7 @@
 - **Loading indicators** and **global error handling**
 - **Form validations** (required fields, numeric checks, positive amounts)  and adnvanced filtering.
 - **Pagination** for long lists
+- Guided Tour (at least 5 steps for new users)
 - **Toast Notifications**
   
   - Show success/error messages with any toast package/library
@@ -67,8 +55,6 @@
 - **UI/UX Considerations:**
   
   - Performance improvements via lazy-loading or skeleton loaders
-
----
 
 ## **Submission Guidelines**
 

@@ -5,6 +5,7 @@ import Login from "@/pages/Auth/Login";
 import Register from "@/pages/Auth/Register";
 import Unauthorised from "@/pages/Auth/Unauthorised";
 import AboutPage from "@/pages/Public/About";
+import ContactPage from "@/pages/Public/Contact";
 import HomePage from "@/pages/Public/Home";
 import ParcelStatus from "@/pages/Reciever/ParcelStatus";
 import { withAuth } from "@/utils/authCheck";
@@ -22,6 +23,10 @@ export const router = createBrowserRouter([
       {
         Component: AboutPage,
         path: "about",
+      },
+      {
+        Component: ContactPage,
+        path: "contact",
       },
     ],
   },
