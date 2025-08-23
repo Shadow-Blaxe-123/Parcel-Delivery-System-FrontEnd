@@ -26,7 +26,9 @@ export default function Navigation() {
   const dispatch = useAppDispatch();
   const authState = useAppSelector((state) => state.auth);
   const [logoutMutation] = useLogoutMutation();
-  const dashboard = redirectByRole(authState.user?.role as TRole);
+  const dashboard = authState.isloggedIn
+    ? redirectByRole(authState.user?.role as TRole)
+    : "/login";
   const navigationLinks = [
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
