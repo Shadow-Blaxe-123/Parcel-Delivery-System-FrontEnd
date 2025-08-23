@@ -2,7 +2,7 @@ import type { store } from "@/store/store";
 
 export type { ILoginRequest, ILoginResponse } from "@/types/auth.types";
 
-export type { IUser } from "@/types/user.types";
+export type { IUser, TRole } from "@/types/user.types";
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;

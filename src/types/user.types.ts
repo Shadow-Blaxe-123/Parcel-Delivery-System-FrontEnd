@@ -12,8 +12,6 @@ export interface IUser {
   phone: string;
 }
 
-export const role = {
-  ADMIN: "ADMIN",
-  SENDER: "SENDER",
-  RECEIVER: "RECEIVER",
-};
+export type TRole = "ADMIN" | "SENDER" | "RECEIVER";
+
+// export type TRole =

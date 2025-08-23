@@ -2,8 +2,10 @@ import App from "@/App";
 import DashBoard from "@/components/layout/DashBoard";
 import Login from "@/pages/Auth/Login";
 import Register from "@/pages/Auth/Register";
+import Unauthorised from "@/pages/Auth/Unauthorised";
 import AboutPage from "@/pages/Public/About";
 import HomePage from "@/pages/Public/Home";
+import { withAuth } from "@/utils/authCheck";
 import { createBrowserRouter } from "react-router";
 
 export const router = createBrowserRouter([
@@ -30,7 +32,17 @@ export const router = createBrowserRouter([
     path: "/login",
   },
   {
-    Component: DashBoard,
-    path: "/dashboard",
+    Component: Unauthorised,
+    path: "/unauthorised",
+  },
+  {
+    Component: withAuth(DashBoard, "ADMIN"),
+    path: "/admin",
+    children: [
+      {
+        index: true,
+        element: <div>Dashboard</div>,
+      },
+    ],
   },
 ]);
