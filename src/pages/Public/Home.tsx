@@ -1,6 +1,9 @@
+import { useAppSelector } from "@/hooks/redux";
 import { Link } from "react-router";
 
 function HomePage() {
+  const isLoggedIn = useAppSelector((state) => state.auth.isloggedIn);
+
   return (
     <div>
       <section className="bg-white lg:grid lg:h-screen lg:place-content-center dark:bg-background">
@@ -21,7 +24,7 @@ function HomePage() {
             <div className="mt-4 flex justify-center gap-4 sm:mt-6">
               {/* TODO: Redirect to register or dashboard based on if logged in. */}
               <Link
-                to={"/register"}
+                to={isLoggedIn ? "/dashboard" : "/login"}
                 className="inline-block rounded border border-primary bg-primary/80 px-5 py-3 font-medium text-foreground shadow-sm transition-colors hover:bg-primary"
               >
                 Get Started

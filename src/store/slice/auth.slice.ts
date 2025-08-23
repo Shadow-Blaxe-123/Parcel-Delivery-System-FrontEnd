@@ -1,12 +1,12 @@
-import type { IUser } from "@/types/user.types";
+import type { IUser } from "@/types";
 import { createSlice } from "@reduxjs/toolkit";
 
-interface LoggedUser {
+export interface AuthState {
   isloggedIn: boolean;
   user: IUser | null;
 }
 
-const intialState: LoggedUser = {
+const intialState: AuthState = {
   isloggedIn: false,
   user: null,
 };

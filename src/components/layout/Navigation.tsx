@@ -13,6 +13,9 @@ import {
 } from "@/components/ui/popover";
 import { ModeToggle } from "./ModeToggle";
 import { Link } from "react-router";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux";
+import { useLogoutMutation } from "@/store/api/auth.api";
+import { logout } from "@/store/slice/auth.slice";
 
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
@@ -23,6 +26,15 @@ const navigationLinks = [
 ];
 
 export default function Navigation() {
+  const dispatch = useAppDispatch();
+  const authState = useAppSelector((state) => state.auth);
+  const [logoutMutation] = useLogoutMutation();
+
+  const handleLogout = () => {
+    logoutMutation(null);
+    dispatch(logout());
+  };
+
   return (
     <header className="border-b px-4 md:px-6 border-primary/70">
       <div className="flex h-16 items-center justify-between gap-4">
@@ -101,12 +113,22 @@ export default function Navigation() {
         </div>
         {/* Right side */}
         <div className="flex items-center gap-2">
-          <Button asChild size="sm" className="text-sm">
-            <Link to="/login">Log In</Link>
-          </Button>
-          <Button asChild size="sm" className="text-sm" variant={"outline"}>
-            <Link to="/logout">Log Out</Link>
-          </Button>
+          {authState.isloggedIn ? (
+            <Button
+              asChild
+              size="sm"
+              className="text-sm"
+              variant={"outline"}
+              onClick={handleLogout}
+            >
+              <Link to="/">Log Out</Link>
+            </Button>
+          ) : (
+            <Button asChild size="sm" className="text-sm">
+              <Link to="/login">Log In</Link>
+            </Button>
+          )}
+
           <ModeToggle />
         </div>
       </div>
