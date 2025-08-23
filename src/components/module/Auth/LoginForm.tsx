@@ -24,9 +24,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "./authSchema";
 import { toast } from "sonner";
 import { useLoginMutation } from "@/store/api/auth.api";
-import type { IError } from "@/types";
+import type { IError, TRole } from "@/types";
 import { useAppDispatch } from "@/hooks/redux";
 import { login } from "@/store/slice/auth.slice";
+import redirectByRole from "@/utils/redirectByRole";
 
 function LoginForm() {
   const dispatch = useAppDispatch();
@@ -47,7 +48,7 @@ function LoginForm() {
       console.log(res);
       toast.success("Login successful", { id: toastId });
       dispatch(login(res.data.user));
-      navigate("/dashboard");
+      navigate(redirectByRole(res.data.user.role as TRole));
     } catch (error) {
       console.log(error);
       toast.error((error as IError)?.message || "Something went wrong");

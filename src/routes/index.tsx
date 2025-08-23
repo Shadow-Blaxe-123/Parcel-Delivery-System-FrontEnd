@@ -34,7 +34,7 @@ export const router = createBrowserRouter([
   },
   {
     Component: Unauthorised,
-    path: "/unauthorised",
+    path: "/unauthorized",
   },
   {
     Component: withAuth(DashBoard, "ADMIN"),

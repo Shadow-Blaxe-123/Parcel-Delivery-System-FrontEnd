@@ -12,12 +12,11 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import type z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "./authSchema";
 import { toast } from "sonner";
-// import { useLoginMutation } from "@/store/api/auth.api";
 import type { IError } from "@/types";
 import {
   Select,
@@ -26,13 +25,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-// import { useAppDispatch } from "@/hooks/redux";
-// import { login } from "@/store/slice/auth.slice";
+import { useRegisterMutation } from "@/store/api/auth.api";
 
 function RegisterForm() {
-  //   const dispatch = useAppDispatch();
-  //   const [loginMutation] = useLoginMutation();
-  //   const navigate = useNavigate();
+  const [register] = useRegisterMutation();
+  const navigate = useNavigate();
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
@@ -48,12 +45,12 @@ function RegisterForm() {
   const onSubmit = async (data: z.infer<typeof registerSchema>) => {
     try {
       console.log(data);
-      //   const toastId = toast.loading("Logging in...");
-      //   const res = await loginMutation(data).unwrap();
-      //   console.log(res);
-      //   toast.success("Login successful", { id: toastId });
+      const toastId = toast.loading("Loading...");
+      const res = await register(data).unwrap();
+      console.log(res);
+      toast.success("Account created successful", { id: toastId });
       //   dispatch(login(res.data.user));
-      //   navigate("/dashboard");
+      navigate("/login");
     } catch (error) {
       console.log(error);
       toast.error((error as IError)?.message || "Something went wrong");

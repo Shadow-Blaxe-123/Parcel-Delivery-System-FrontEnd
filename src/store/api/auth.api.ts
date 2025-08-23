@@ -1,4 +1,4 @@
-import type { ILoginRequest, ILoginResponse, IResponse } from "@/types";
+import type { ILoginRequest, ILoginResponse, IResponse, IUser } from "@/types";
 import { baseApi } from "./baseApi";
 
 export const authApi = baseApi.injectEndpoints({
@@ -16,7 +16,15 @@ export const authApi = baseApi.injectEndpoints({
         method: "POST",
       }),
     }),
+    register: builder.mutation<IResponse<IUser>, IUser>({
+      query: (data) => ({
+        url: "/user/create",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useLoginMutation, useLogoutMutation } = authApi;
+export const { useLoginMutation, useLogoutMutation, useRegisterMutation } =
+  authApi;
