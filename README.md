@@ -5,10 +5,6 @@
 
 ## **📌 Minimum Functional Requirements**
 
-### **1️⃣ Public Landing Section**
-
-- **Contact Page —** Inquiry form (simulated submission)
-
 ### **3️⃣ Sender Dashboard**
 
 - Create parcel delivery requests
