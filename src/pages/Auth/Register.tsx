@@ -1,7 +1,9 @@
+import RegisterForm from "@/components/module/Auth/RegisterForm";
+
 function Register() {
   return (
-    <div>
-      <h1>This is Register component.</h1>
+    <div className="h-screen flex items-center justify-center">
+      <RegisterForm />
     </div>
   );
 }

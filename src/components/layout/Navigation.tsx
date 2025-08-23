@@ -135,7 +135,7 @@ export default function Navigation() {
               <Link to="/">Log Out</Link>
             </Button>
           ) : (
-            <Button asChild size="sm" className="text-sm">
+            <Button asChild size="sm" className="text-sm text-foreground">
               <Link to="/login">Log In</Link>
             </Button>
           )}
