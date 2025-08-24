@@ -2,23 +2,53 @@ import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
 import { Skeleton } from "@/components/ui/skeleton"; // 👈 Import skeleton
-import { useGetUsersQuery } from "@/store/api/admin.api";
+import { useBlockUserMutation, useGetUsersQuery } from "@/store/api/admin.api";
 import { BanIcon, ShieldCheckIcon } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
+import { useState } from "react";
+import { toast } from "sonner";
+import { BlockConfirmation } from "@/components/layout/BlockConfirmation";
 
 function Users() {
-  const { data, isLoading } = useGetUsersQuery(null); // 👈 Use isLoading
+  const [page, setPage] = useState(1);
+  const [blockUser] = useBlockUserMutation();
+  const { data, isLoading } = useGetUsersQuery(
+    { page },
+    { refetchOnMountOrArgChange: true }
+  ); // 👈 Use isLoading
+
+  const handleSubmit = async (id: string, isBlocked: boolean) => {
+    const msg = isBlocked
+      ? "User blocked successfully"
+      : "User unblocked successfully";
+
+    const t = toast.loading("Loading...");
+    try {
+      await blockUser({ id, isBlocked }).unwrap();
+      toast.success(msg, { id: t });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="rounded-md border shadow-sm">
@@ -26,10 +56,6 @@ function Users() {
         Manage Users
       </h1>
       <Table>
-        <TableCaption className="text-muted-foreground mt-4">
-          A list of all users in the system.
-        </TableCaption>
-
         <TableHeader>
           <TableRow>
             <TableHead className="w-[150px]">Name</TableHead>
@@ -80,9 +106,16 @@ function Users() {
                     {user.isBlocked ? (
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <Button className="bg-green-600 hover:bg-green-700">
-                            <ShieldCheckIcon className="w-4 h-4 text-white" />
-                          </Button>
+                          <BlockConfirmation
+                            msg="Are you sure you want to unblock this user?"
+                            onConfirm={() =>
+                              handleSubmit(user._id as string, false)
+                            }
+                          >
+                            <Button className="bg-green-600 hover:bg-green-700">
+                              <ShieldCheckIcon className="w-4 h-4 text-white" />
+                            </Button>
+                          </BlockConfirmation>
                         </TooltipTrigger>
                         <TooltipContent side="bottom">
                           <p className="text-foreground">UnBlock</p>
@@ -91,9 +124,16 @@ function Users() {
                     ) : (
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <Button className="bg-red-600 hover:bg-red-700">
-                            <BanIcon className="w-4 h-4 text-white" />
-                          </Button>
+                          <BlockConfirmation
+                            onConfirm={() =>
+                              handleSubmit(user._id as string, true)
+                            }
+                            msg="Are you sure you want to block this user?"
+                          >
+                            <Button className="bg-red-600 hover:bg-red-700">
+                              <BanIcon className="w-4 h-4 text-white" />
+                            </Button>
+                          </BlockConfirmation>
                         </TooltipTrigger>
                         <TooltipContent side="bottom">
                           <p className="text-foreground">Block</p>
@@ -105,6 +145,30 @@ function Users() {
               ))}
         </TableBody>
       </Table>
+      <Pagination>
+        <PaginationContent>
+          <PaginationItem className="cursor-pointer">
+            <PaginationPrevious onClick={() => page > 1 && setPage(page - 1)} />
+          </PaginationItem>
+
+          <PaginationItem className="cursor-pointer">
+            <PaginationLink isActive>{page}</PaginationLink>
+          </PaginationItem>
+
+          <PaginationItem>
+            <PaginationEllipsis />
+          </PaginationItem>
+          <PaginationItem className="cursor-pointer">
+            <PaginationNext
+              onClick={() =>
+                data?.meta?.totalPages &&
+                data.meta.totalPages > page &&
+                setPage(page + 1)
+              }
+            />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
     </div>
   );
 }

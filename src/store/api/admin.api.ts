@@ -4,11 +4,23 @@ import { baseApi } from "./baseApi";
 export const adminApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getUsers: builder.query<IResponse<IUser[]>, unknown>({
-      query: () => ({
+      query: (params) => ({
         url: "/user/get-all",
         method: "GET",
+        params: params ? params : {},
       }),
       providesTags: ["User"],
+    }),
+    blockUser: builder.mutation<
+      IResponse<IUser>,
+      { id: string; isBlocked: boolean }
+    >({
+      query: ({ id, isBlocked }) => ({
+        url: `/user/update/${id}`,
+        method: "PATCH",
+        body: { isBlocked: isBlocked },
+      }),
+      invalidatesTags: ["User"],
     }),
     getParcels: builder.query<IResponse<IParcel[]>, unknown>({
       query: (param) => ({
@@ -21,4 +33,5 @@ export const adminApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetUsersQuery, useGetParcelsQuery } = adminApi;
+export const { useGetUsersQuery, useGetParcelsQuery, useBlockUserMutation } =
+  adminApi;
