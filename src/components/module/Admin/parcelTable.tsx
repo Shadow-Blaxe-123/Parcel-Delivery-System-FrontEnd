@@ -103,7 +103,25 @@ function ParcelTable() {
                   <TableCell>{parcel.sender?.name ?? "N/A"}</TableCell>
                   <TableCell>{parcel.receiver?.name ?? "N/A"}</TableCell>
                   <TableCell>{parcel.fee}</TableCell>
-                  <TableCell className="text-right">
+                  <TableCell className="text-right grid grid-cols-3 gap-5">
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button className="text-foreground">View Icons</Button>
+                      </TooltipTrigger>
+                      <TooltipContent side="bottom">
+                        <p className="text-sm">View</p>
+                      </TooltipContent>
+                    </Tooltip>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button className="text-foreground">
+                          Update Icons
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent side="bottom">
+                        <p className="text-sm">Update</p>
+                      </TooltipContent>
+                    </Tooltip>
                     {parcel.isBlocked ? (
                       <Tooltip>
                         <TooltipTrigger asChild>

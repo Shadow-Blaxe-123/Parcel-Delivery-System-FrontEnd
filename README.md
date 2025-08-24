@@ -39,10 +39,6 @@
   - **Role-Specific Views:** Sender sees their parcels, Receiver sees received parcels, Admin sees all.  
   - **Responsive Design:** Fully responsive with consistent margins, spacing, typography, and color contrast.
 
-- **UI/UX Considerations:**
-  
-  - Performance improvements via lazy-loading or skeleton loaders
-
 ## **Submission Guidelines**
 
 1. **Codebase**
@@ -57,12 +53,6 @@
 
 2. **Live Deployment**
     - Provide live deployment URLs for both frontend and backend
-3. **Demo Video**
-
-A short video (5–10 minutes) showing:
-
-- Show authentication flow and dashboards for **Sender, Receiver, Admin**
-- Demonstrate parcel creation, cancellation, delivery confirmation, and admin management
   
-1. **Credentials**
+3. **Credentials**
     - Provide admin/sender/receiver login details (email & password) for testing
