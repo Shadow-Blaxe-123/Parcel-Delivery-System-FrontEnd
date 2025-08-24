@@ -1,4 +1,5 @@
 import type { store } from "@/store/store";
+import type { ComponentType } from "react";
 
 export type { ILoginRequest, ILoginResponse } from "@/types/auth.types";
 
@@ -19,4 +20,10 @@ export interface IError {
   statusCode: number;
   success: boolean;
   message: string;
+}
+
+export interface IDashboard {
+  title: string;
+  url: string;
+  component: ComponentType;
 }

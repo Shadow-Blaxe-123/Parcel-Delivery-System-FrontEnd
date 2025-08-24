@@ -1,6 +1,7 @@
 import App from "@/App";
 import DashBoard from "@/components/layout/DashBoard";
-import AllUsers from "@/pages/Admin/AllUsers";
+import Overview from "@/pages/Admin/Overview";
+import Users from "@/pages/Admin/USers";
 import Login from "@/pages/Auth/Login";
 import Register from "@/pages/Auth/Register";
 import Unauthorised from "@/pages/Auth/Unauthorised";
@@ -48,11 +49,11 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Navigate to="/admin/users" />,
+        Component: Overview,
       },
       {
         path: "users",
-        Component: AllUsers,
+        Component: Users,
       },
     ],
   },
