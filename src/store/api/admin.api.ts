@@ -1,4 +1,4 @@
-import type { IResponse, IUser } from "@/types";
+import type { IParcel, IResponse, IUser } from "@/types";
 import { baseApi } from "./baseApi";
 
 export const adminApi = baseApi.injectEndpoints({
@@ -10,14 +10,15 @@ export const adminApi = baseApi.injectEndpoints({
       }),
       providesTags: ["User"],
     }),
-    getParcels: builder.query<IResponse<IUser[]>, unknown>({
-      query: () => ({
-        url: "/user/get-all",
+    getParcels: builder.query<IResponse<IParcel[]>, unknown>({
+      query: (param) => ({
+        url: "/parcel/get-all",
         method: "GET",
+        params: param ? param : {},
       }),
-      providesTags: ["User"],
+      providesTags: ["Parcel"],
     }),
   }),
 });
 
-export const { useGetUsersQuery } = adminApi;
+export const { useGetUsersQuery, useGetParcelsQuery } = adminApi;

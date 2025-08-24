@@ -10,5 +10,5 @@ export const baseApi = createApi({
     credentials: "include",
   }),
   endpoints: () => ({}),
-  tagTypes: ["User"],
+  tagTypes: ["User", "Parcel"],
 });

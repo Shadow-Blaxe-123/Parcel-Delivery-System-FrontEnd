@@ -4,6 +4,13 @@ import type { ComponentType } from "react";
 export type { ILoginRequest, ILoginResponse } from "@/types/auth.types";
 
 export type { IUser, TRole } from "@/types/user.types";
+export type {
+  IParcel,
+  ICreateParcel,
+  ParcelStatus,
+  ParcelStatusLog,
+  ParcelTypes,
+} from "@/types/parcel.types";
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;
