@@ -1,7 +1,6 @@
 import App from "@/App";
 import DashBoard from "@/components/layout/DashBoard";
 import Overview from "@/pages/Admin/Overview";
-import Users from "@/pages/Admin/USers";
 import Login from "@/pages/Auth/Login";
 import Register from "@/pages/Auth/Register";
 import Unauthorised from "@/pages/Auth/Unauthorised";
@@ -10,7 +9,9 @@ import ContactPage from "@/pages/Public/Contact";
 import HomePage from "@/pages/Public/Home";
 import ParcelStatus from "@/pages/Reciever/ParcelStatus";
 import { withAuth } from "@/utils/authCheck";
+import { generateRoute } from "@/utils/generateRoute";
 import { createBrowserRouter, Navigate } from "react-router";
+import { adminDashboardRoutes } from "./admin.route";
 
 export const router = createBrowserRouter([
   {
@@ -51,10 +52,7 @@ export const router = createBrowserRouter([
         index: true,
         Component: Overview,
       },
-      {
-        path: "users",
-        Component: Users,
-      },
+      ...generateRoute(adminDashboardRoutes),
     ],
   },
   {

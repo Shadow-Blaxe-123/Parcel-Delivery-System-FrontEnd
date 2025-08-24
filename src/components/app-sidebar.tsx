@@ -13,25 +13,12 @@ import {
 } from "@/components/ui/sidebar";
 import { Link } from "react-router";
 import Logo from "@/assets/Logo";
+import type { IDashboard } from "@/types";
+import { adminDashboardRoutes } from "@/routes/admin.route";
 
 // This is sample data.
-const data = {
-  navMain: [
-    {
-      title: "Overview",
-      url: "/admin",
-    },
-    {
-      title: "Users",
-      url: "/admin/users",
-    },
 
-    {
-      title: "Parcels",
-      url: "#",
-    },
-  ],
-};
+const navMain: IDashboard[] = adminDashboardRoutes;
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -46,7 +33,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         {/* We create a SidebarGroup for each parent. */}
-        {data.navMain.map((item) => (
+        {navMain.map((item) => (
           <SidebarGroup key={item.title}>
             <SidebarGroupContent>
               <SidebarMenu>
