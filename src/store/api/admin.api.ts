@@ -30,8 +30,22 @@ export const adminApi = baseApi.injectEndpoints({
       }),
       providesTags: ["Parcel"],
     }),
+    blockParcel: builder.mutation<
+      IResponse<IParcel>,
+      { trackingId: string; isBlocked: boolean }
+    >({
+      query: ({ trackingId, isBlocked }) => ({
+        url: `/parcel/update/${trackingId}`,
+        method: "PATCH",
+        body: { isBlocked: isBlocked },
+      }),
+    }),
   }),
 });
 
-export const { useGetUsersQuery, useGetParcelsQuery, useBlockUserMutation } =
-  adminApi;
+export const {
+  useGetUsersQuery,
+  useGetParcelsQuery,
+  useBlockUserMutation,
+  useBlockParcelMutation,
+} = adminApi;

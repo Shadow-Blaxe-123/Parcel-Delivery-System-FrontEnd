@@ -13,7 +13,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { BanIcon, ShieldCheckIcon } from "lucide-react";
+import { BanIcon, PencilIcon, ShieldCheckIcon, ViewIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import type { ParcelStatus } from "@/types";
 import { useGetParcelsQuery } from "@/store/api/admin.api";
@@ -36,11 +36,12 @@ function ParcelTable() {
           <TableRow>
             <TableHead className="w-[150px]">Tracking ID</TableHead>
             <TableHead className="w-[200px]">Title</TableHead>
+            <TableHead className="w-[50px]">Type</TableHead>
             <TableHead className="w-[100px]">Status</TableHead>
-            <TableHead className="w-[140px]">Delivery Date</TableHead>
+            <TableHead className="w-[100px]">Delivery Date</TableHead>
             <TableHead className="w-[140px]">Sender</TableHead>
             <TableHead className="w-[120px]">Receiver</TableHead>
-            <TableHead className="w-[120px]">Fee</TableHead>
+            <TableHead className="w-[100px]">Fee</TableHead>
             <TableHead className="text-right w-[120px]">Actions</TableHead>
           </TableRow>
         </TableHeader>
@@ -84,14 +85,12 @@ function ParcelTable() {
                     {parcel.trackingId}
                   </TableCell>
                   <TableCell>{parcel.title}</TableCell>
+                  <TableCell>{parcel.type}</TableCell>
                   <TableCell>
                     <Badge
                       className={`text-xs font-medium px-2 py-0.5 rounded-full ${
                         statusClassMap[parcel.status]
                       }`}
-                      // style={{
-                      //   color: "white",
-                      // }}
                     >
                       {parcel.status}
                     </Badge>
@@ -106,7 +105,9 @@ function ParcelTable() {
                   <TableCell className="text-right grid grid-cols-3 gap-5">
                     <Tooltip>
                       <TooltipTrigger asChild>
-                        <Button className="text-foreground">View Icons</Button>
+                        <Button className="text-foreground" variant={"outline"}>
+                          <ViewIcon className="w-4 h-4" />
+                        </Button>
                       </TooltipTrigger>
                       <TooltipContent side="bottom">
                         <p className="text-sm">View</p>
@@ -114,8 +115,8 @@ function ParcelTable() {
                     </Tooltip>
                     <Tooltip>
                       <TooltipTrigger asChild>
-                        <Button className="text-foreground">
-                          Update Icons
+                        <Button className="text-foreground bg-muted hover:bg-primary">
+                          <PencilIcon className="w-4 h-4" />
                         </Button>
                       </TooltipTrigger>
                       <TooltipContent side="bottom">
