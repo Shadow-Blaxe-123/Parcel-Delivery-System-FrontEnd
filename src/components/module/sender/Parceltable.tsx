@@ -12,9 +12,15 @@ import type { ParcelStatus, ParcelTypes } from "@/types";
 import { useAppSelector } from "@/hooks/redux";
 
 import PaginationGlobal from "../PaginationGlobal";
-import { useGetAllMyParcelsQuery } from "@/store/api/sender.api";
+import {
+  useCancelParcelMutation,
+  useGetAllMyParcelsQuery,
+} from "@/store/api/sender.api";
 import { useState } from "react";
 import { SearchFilter } from "../Search";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+import { ParcelModal } from "./ParcelModal";
 
 function ParcelTable() {
   const page = useAppSelector((state) => state.page.page);
@@ -27,6 +33,7 @@ function ParcelTable() {
     type,
     status,
   });
+  const [cancel] = useCancelParcelMutation();
 
   const statusClassMap: Record<ParcelStatus, string> = {
     Requested: "bg-gray-500 text-white",
@@ -37,7 +44,20 @@ function ParcelTable() {
     Cancelled: "bg-red-600 text-white",
     Blocked: "bg-red-600 text-white",
   };
-
+  const handleCancel = async (trackingId: string) => {
+    const t = toast.loading("Cancelling parcel...");
+    try {
+      const res = await cancel(trackingId).unwrap();
+      console.log(res);
+      toast.success("Parcel cancelled successfully", { id: t });
+    } catch (error) {
+      console.log(error);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      toast.error((error as any).data?.message || "Something went wrong", {
+        id: t,
+      });
+    }
+  };
   return (
     <div className="rounded-lg border shadow-sm overflow-hidden">
       <SearchFilter
@@ -124,7 +144,17 @@ function ParcelTable() {
                   <TableCell>{parcel.receiver?.name ?? "N/A"}</TableCell>
                   <TableCell>{parcel.fee}</TableCell>
                   <TableCell className="text-right">
-                    <div className="flex justify-end gap-5"></div>
+                    <div className="flex justify-end gap-5">
+                      <ParcelModal parcel={parcel} />
+                      <Button
+                        className="text-foreground"
+                        onClick={() =>
+                          handleCancel(parcel.trackingId as string)
+                        }
+                      >
+                        Cancel
+                      </Button>
+                    </div>
                   </TableCell>
                 </TableRow>
               ))}

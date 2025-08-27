@@ -1,10 +1,5 @@
 # **📌 Minimum Functional Requirements**
 
-## **3️⃣ Sender Dashboard**
-
-- Cancel parcel (if not dispatched)
-- View all created parcels and their status logs
-
 ## **4️⃣ Receiver Dashboard**
 
 - View incoming parcels
@@ -13,7 +8,6 @@
 
 ## **6️⃣ Parcel Tracking**
 
-- Each parcel has a **unique tracking ID**
 - Public or authenticated users can search parcels by tracking ID
 - Parcel details include **status logs** (status, timestamp, updatedBy, note)
 

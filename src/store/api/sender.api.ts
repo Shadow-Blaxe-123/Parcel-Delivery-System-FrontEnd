@@ -18,7 +18,21 @@ export const senderApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
+    cancelParcel: builder.mutation<IResponse<IParcel>, string>({
+      query: (trackingId) => ({
+        url: `/parcel/update/sender/${trackingId}`,
+        method: "PATCH",
+        body: {
+          status: "Cancelled",
+        },
+      }),
+      invalidatesTags: ["Parcel"],
+    }),
   }),
 });
 
-export const { useGetAllMyParcelsQuery, useCreateParcelMutation } = senderApi;
+export const {
+  useGetAllMyParcelsQuery,
+  useCreateParcelMutation,
+  useCancelParcelMutation,
+} = senderApi;

@@ -32,7 +32,7 @@ export interface ParcelStatusLog {
   // Auto from service layer
   timestamp: Date;
   status: ParcelStatus;
-  updatedBy: string;
+  updatedBy: IUser;
   // Req.body
   location: string;
   notes?: string;
