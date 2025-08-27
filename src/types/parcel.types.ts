@@ -18,6 +18,16 @@ export type ParcelStatus =
   | "Cancelled"
   | "Blocked";
 
+export const parcelStatusOptions: ParcelStatus[] = [
+  "Requested",
+  "Approved",
+  "Dispatched",
+  "In Transit",
+  "Delivered",
+  "Cancelled",
+  "Blocked",
+];
+
 export interface ParcelStatusLog {
   // Auto from service layer
   timestamp: Date;
