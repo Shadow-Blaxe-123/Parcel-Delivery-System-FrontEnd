@@ -54,6 +54,14 @@ export const adminApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Parcel"],
     }),
+    updateParel: builder.mutation<IResponse<IParcel>, Partial<IParcel>>({
+      query: (data) => ({
+        url: `/parcel/update/admin/${data.trackingId}`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: ["Parcel"],
+    }),
   }),
 });
 
@@ -62,4 +70,5 @@ export const {
   useGetParcelsQuery,
   useBlockUserMutation,
   useBlockParcelMutation,
+  useUpdateParelMutation,
 } = adminApi;

@@ -9,4 +9,5 @@ export const updateAdminParcelSchema = z.object({
     })
     .optional(),
   deliveryDate: z.union([z.string(), z.date()]).optional(),
+  trackingId: z.string(),
 });

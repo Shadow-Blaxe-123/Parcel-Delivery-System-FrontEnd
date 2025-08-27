@@ -1,5 +1,14 @@
 import { Button } from "@/components/ui/button";
 import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
+import {
   Dialog,
   DialogContent,
   DialogDescription,
@@ -32,6 +41,7 @@ import type { IError, ParcelStatus } from "@/types";
 import {
   useBlockParcelMutation,
   useGetParcelsQuery,
+  useUpdateParelMutation,
 } from "@/store/api/admin.api";
 import { toast } from "sonner";
 import { BlockConfirmation } from "@/components/layout/BlockConfirmation";
@@ -65,11 +75,18 @@ import {
 import { format } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
 
 function ParcelTable() {
+  const [page, setPage] = useState(1);
+
+  const { data, isLoading } = useGetParcelsQuery({ page });
+  const [trackingId, setTrackingId] = useState<string>("");
+
   const form = useForm<z.infer<typeof updateAdminParcelSchema>>({
     resolver: zodResolver(updateAdminParcelSchema),
     defaultValues: {
+      trackingId: "",
       status: "",
       statusLog: {
         location: "",
@@ -88,8 +105,8 @@ function ParcelTable() {
     Blocked: "bg-red-600 text-white",
   };
 
-  const { data, isLoading } = useGetParcelsQuery(null);
   const [blockParcel] = useBlockParcelMutation();
+  const [updateParcel] = useUpdateParelMutation();
 
   const handleBlock = async (
     trackingId: string,
@@ -125,7 +142,35 @@ function ParcelTable() {
   };
   const onSubmit = async (data: z.infer<typeof updateAdminParcelSchema>) => {
     console.log(data);
+    const t = toast.loading("Loading...");
+    try {
+      const d = {
+        ...data,
+        status: data.status as ParcelStatus,
+        deliveryDate:
+          typeof data.deliveryDate === "string"
+            ? new Date(data.deliveryDate)
+            : data.deliveryDate,
+        trackingId,
+      };
+
+      const res = await updateParcel(d).unwrap();
+      console.log(res);
+      toast.success("Parcel updated successfully", { id: t });
+    } catch (err) {
+      console.log(err);
+      toast.error(
+        (err as IError)?.message ||
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (err as any)?.data?.message ||
+          "Something went wrong",
+        {
+          id: t,
+        }
+      );
+    }
   };
+
   return (
     <div className="rounded-lg border shadow-sm overflow-hidden">
       <Table className="text-sm">
@@ -205,7 +250,12 @@ function ParcelTable() {
                         <Tooltip>
                           <TooltipTrigger asChild>
                             <DialogTrigger asChild>
-                              <Button className="text-foreground bg-muted hover:bg-primary">
+                              <Button
+                                className="text-foreground bg-muted hover:bg-primary"
+                                onClick={() =>
+                                  setTrackingId(parcel.trackingId as string)
+                                }
+                              >
                                 <PencilIcon className="w-4 h-4" />
                               </Button>
                             </DialogTrigger>
@@ -403,6 +453,30 @@ function ParcelTable() {
               ))}
         </TableBody>
       </Table>
+      <Pagination>
+        <PaginationContent>
+          <PaginationItem className="cursor-pointer">
+            <PaginationPrevious onClick={() => page > 1 && setPage(page - 1)} />
+          </PaginationItem>
+
+          <PaginationItem className="cursor-pointer">
+            <PaginationLink isActive>{page}</PaginationLink>
+          </PaginationItem>
+
+          <PaginationItem>
+            <PaginationEllipsis />
+          </PaginationItem>
+          <PaginationItem className="cursor-pointer">
+            <PaginationNext
+              onClick={() =>
+                data?.meta?.totalPages &&
+                data.meta.totalPages > page &&
+                setPage(page + 1)
+              }
+            />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
     </div>
   );
 }
