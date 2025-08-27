@@ -1,10 +1,5 @@
 # **📌 Minimum Functional Requirements**
 
-## **6️⃣ Parcel Tracking**
-
-- Public or authenticated users can search parcels by tracking ID
-- Parcel details include **status logs** (status, timestamp, updatedBy, note)
-
 ## **7️⃣ General Features**
 
 - **Loading indicators** and **global error handling**

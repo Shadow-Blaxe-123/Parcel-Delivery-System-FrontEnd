@@ -31,10 +31,10 @@ export default function Navigation() {
     : "/login";
   const navigationLinks = [
     { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
-    { href: "/contact", label: "Contact" },
+    { href: "/about", label: "About", id: "about" },
+    { href: "/contact", label: "Contact", id: "contact" },
     { href: dashboard, label: "Dashboard" },
-    { href: "/track", label: "Track Parcel" },
+    { href: "/track", label: "Track Parcel", id: "track-parcel" },
   ];
 
   const handleLogout = async () => {
@@ -50,7 +50,7 @@ export default function Navigation() {
   };
 
   return (
-    <header className="border-b px-4 md:px-6 border-primary/70">
+    <header className="border-b px-4 md:px-6 border-primary/70" id="nav">
       <div className="flex h-16 items-center justify-between gap-4">
         {/* Left side */}
         <div className="flex items-center gap-2">
@@ -95,7 +95,9 @@ export default function Navigation() {
                   {navigationLinks.map((link, index) => (
                     <NavigationMenuItem key={index} className="w-full">
                       <NavigationMenuLink className="py-1.5" asChild>
-                        <Link to={link.href}>{link.label}</Link>
+                        <Link id={link.id} to={link.href}>
+                          {link.label}
+                        </Link>
                       </NavigationMenuLink>
                     </NavigationMenuItem>
                   ))}
@@ -117,7 +119,9 @@ export default function Navigation() {
                       className="text-muted-foreground hover:text-primary py-1.5 font-medium"
                       asChild
                     >
-                      <Link to={link.href}>{link.label}</Link>
+                      <Link id={link.id} to={link.href}>
+                        {link.label}
+                      </Link>
                     </NavigationMenuLink>
                   </NavigationMenuItem>
                 ))}

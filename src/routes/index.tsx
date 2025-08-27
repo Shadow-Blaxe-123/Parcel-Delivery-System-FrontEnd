@@ -6,7 +6,6 @@ import Register from "@/pages/Auth/Register";
 import Unauthorised from "@/pages/Auth/Unauthorised";
 import AboutPage from "@/pages/Public/About";
 import ContactPage from "@/pages/Public/Contact";
-import HomePage from "@/pages/Public/Home";
 import ParcelStatus from "@/pages/Reciever/ParcelStatus";
 import { withAuth } from "@/utils/authCheck";
 import { generateRoute } from "@/utils/generateRoute";
@@ -15,6 +14,7 @@ import { adminDashboardRoutes } from "./admin.route";
 import CreateParcel from "@/pages/Sender/CreateParcel";
 import { senderDashboardRoutes } from "./sender.route";
 import ParcelTracking from "@/pages/Public/ParcelTrack";
+import HomePageWithTour from "@/pages/Public/Tour";
 
 export const router = createBrowserRouter([
   {
@@ -22,7 +22,7 @@ export const router = createBrowserRouter([
     path: "/",
     children: [
       {
-        Component: HomePage,
+        Component: HomePageWithTour,
         index: true,
       },
       {

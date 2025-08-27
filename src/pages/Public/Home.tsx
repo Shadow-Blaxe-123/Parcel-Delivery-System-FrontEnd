@@ -26,7 +26,7 @@ function HomePage() {
             </p>
 
             <div>
-              <Button asChild size="lg">
+              <Button asChild size="lg" id="get-started-btn">
                 <Link
                   to={
                     auth.isloggedIn
