@@ -1,7 +1,10 @@
+import ParcelTable from "@/components/module/sender/Parceltable";
+
 function ViewParcels() {
   return (
     <div>
-      <h1>This is ViewParcels component.</h1>
+      <h1>Your Parcels</h1>
+      <ParcelTable />
     </div>
   );
 }

@@ -10,11 +10,7 @@ import {
 import { Skeleton } from "@/components/ui/skeleton"; // 👈 Import skeleton
 import { useBlockUserMutation, useGetUsersQuery } from "@/store/api/admin.api";
 import { BanIcon, ShieldCheckIcon } from "lucide-react";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+
 import { toast } from "sonner";
 import { BlockConfirmation } from "@/components/layout/BlockConfirmation";
 import { useAppSelector } from "@/hooks/redux";
@@ -92,41 +88,25 @@ function UserTable() {
                   <TableCell>{user.phone}</TableCell>
                   <TableCell className="text-right">
                     {user.isBlocked ? (
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <BlockConfirmation
-                            msg="Are you sure you want to unblock this user?"
-                            onConfirm={() =>
-                              handleSubmit(user._id as string, false)
-                            }
-                          >
-                            <Button className="bg-green-600 hover:bg-green-700">
-                              <ShieldCheckIcon className="w-4 h-4 text-white" />
-                            </Button>
-                          </BlockConfirmation>
-                        </TooltipTrigger>
-                        <TooltipContent side="bottom">
-                          <p className="text-foreground">UnBlock</p>
-                        </TooltipContent>
-                      </Tooltip>
+                      <BlockConfirmation
+                        msg="Are you sure you want to unblock this user?"
+                        onConfirm={() =>
+                          handleSubmit(user._id as string, false)
+                        }
+                      >
+                        <Button className="bg-green-600 hover:bg-green-700">
+                          <ShieldCheckIcon className="w-4 h-4 text-white" />
+                        </Button>
+                      </BlockConfirmation>
                     ) : (
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <BlockConfirmation
-                            onConfirm={() =>
-                              handleSubmit(user._id as string, true)
-                            }
-                            msg="Are you sure you want to block this user?"
-                          >
-                            <Button className="bg-red-600 hover:bg-red-700">
-                              <BanIcon className="w-4 h-4 text-white" />
-                            </Button>
-                          </BlockConfirmation>
-                        </TooltipTrigger>
-                        <TooltipContent side="bottom">
-                          <p className="text-foreground">Block</p>
-                        </TooltipContent>
-                      </Tooltip>
+                      <BlockConfirmation
+                        onConfirm={() => handleSubmit(user._id as string, true)}
+                        msg="Are you sure you want to block this user?"
+                      >
+                        <Button className="bg-red-600 hover:bg-red-700">
+                          <BanIcon className="w-4 h-4 text-white" />
+                        </Button>
+                      </BlockConfirmation>
                     )}
                   </TableCell>
                 </TableRow>

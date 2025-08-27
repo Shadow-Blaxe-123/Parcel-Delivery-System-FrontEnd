@@ -9,11 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Skeleton } from "@/components/ui/skeleton";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+
 import { BanIcon, ShieldCheckIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import type { IError, ParcelStatus } from "@/types";
@@ -159,58 +155,44 @@ function ParcelTable() {
                       <ParcelUpdateModal parcel={parcel} />
 
                       {parcel.isBlocked ? (
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <BlockConfirmation
-                              onConfirm={() =>
-                                handleBlock(
-                                  parcel.trackingId as string,
-                                  false,
-                                  "Requested",
-                                  true
-                                )
-                              }
-                              msg="Are you sure you want to unblock this parcel?"
-                            >
-                              <Button
-                                className="bg-green-600 hover:bg-green-700"
-                                size="icon"
-                              >
-                                <ShieldCheckIcon className="w-4 h-4 text-white" />
-                              </Button>
-                            </BlockConfirmation>
-                          </TooltipTrigger>
-                          <TooltipContent side="bottom">
-                            <p className="text-sm">Unblock</p>
-                          </TooltipContent>
-                        </Tooltip>
+                        <BlockConfirmation
+                          onConfirm={() =>
+                            handleBlock(
+                              parcel.trackingId as string,
+                              false,
+                              "Requested",
+                              true
+                            )
+                          }
+                          msg="Are you sure you want to unblock this parcel?"
+                        >
+                          <Button
+                            className="bg-green-600 hover:bg-green-700"
+                            size="icon"
+                          >
+                            <ShieldCheckIcon className="w-4 h-4 text-white" />
+                          </Button>
+                        </BlockConfirmation>
                       ) : (
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <BlockConfirmation
-                              onConfirm={() =>
-                                handleBlock(
-                                  parcel.trackingId as string,
-                                  true,
-                                  "Blocked",
-                                  parcel.status === "Requested" ||
-                                    parcel.status === "Approved"
-                                )
-                              }
-                              msg="Are you sure you want to block this parcel?"
-                            >
-                              <Button
-                                className="bg-red-600 hover:bg-red-700"
-                                size="icon"
-                              >
-                                <BanIcon className="w-4 h-4 text-white" />
-                              </Button>
-                            </BlockConfirmation>
-                          </TooltipTrigger>
-                          <TooltipContent side="bottom">
-                            <p className="text-sm">Block</p>
-                          </TooltipContent>
-                        </Tooltip>
+                        <BlockConfirmation
+                          onConfirm={() =>
+                            handleBlock(
+                              parcel.trackingId as string,
+                              true,
+                              "Blocked",
+                              parcel.status === "Requested" ||
+                                parcel.status === "Approved"
+                            )
+                          }
+                          msg="Are you sure you want to block this parcel?"
+                        >
+                          <Button
+                            className="bg-red-600 hover:bg-red-700"
+                            size="icon"
+                          >
+                            <BanIcon className="w-4 h-4 text-white" />
+                          </Button>
+                        </BlockConfirmation>
                       )}
                     </div>
                   </TableCell>
