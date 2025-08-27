@@ -14,6 +14,7 @@ import { createBrowserRouter, Navigate } from "react-router";
 import { adminDashboardRoutes } from "./admin.route";
 import CreateParcel from "@/pages/Sender/CreateParcel";
 import { senderDashboardRoutes } from "./sender.route";
+import ParcelTracking from "@/pages/Public/ParcelTrack";
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
       {
         Component: ContactPage,
         path: "contact",
+      },
+      {
+        Component: ParcelTracking,
+        path: "track",
       },
     ],
   },

@@ -34,6 +34,7 @@ export default function Navigation() {
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
     { href: dashboard, label: "Dashboard" },
+    { href: "/track", label: "Track Parcel" },
   ];
 
   const handleLogout = async () => {
