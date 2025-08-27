@@ -8,15 +8,25 @@ import {
 } from "@/components/ui/table";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
-import type { ParcelStatus } from "@/types";
+import type { ParcelStatus, ParcelTypes } from "@/types";
 import { useAppSelector } from "@/hooks/redux";
 
 import PaginationGlobal from "../PaginationGlobal";
 import { useGetAllMyParcelsQuery } from "@/store/api/sender.api";
+import { useState } from "react";
+import { SearchFilter } from "../Search";
 
 function ParcelTable() {
   const page = useAppSelector((state) => state.page.page);
-  const { data, isLoading } = useGetAllMyParcelsQuery({ page });
+  const [searchTerm, setSearchTerm] = useState<string>();
+  const [type, setType] = useState<ParcelTypes>();
+  const [status, setStatus] = useState<ParcelStatus>();
+  const { data, isLoading } = useGetAllMyParcelsQuery({
+    page,
+    searchTerm,
+    type,
+    status,
+  });
 
   const statusClassMap: Record<ParcelStatus, string> = {
     Requested: "bg-gray-500 text-white",
@@ -30,6 +40,15 @@ function ParcelTable() {
 
   return (
     <div className="rounded-lg border shadow-sm overflow-hidden">
+      <SearchFilter
+        onSearchChange={(val) => val !== "all" && setSearchTerm(val)}
+        onTypeChange={(val) =>
+          val !== "all" ? setType(val) : setType(undefined)
+        }
+        onStatusChange={(val) =>
+          val !== "all" ? setStatus(val) : setStatus(undefined)
+        }
+      />
       <Table className="text-sm">
         <TableHeader className="bg-muted">
           <TableRow>

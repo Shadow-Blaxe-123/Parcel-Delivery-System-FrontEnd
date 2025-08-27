@@ -2,7 +2,6 @@
 
 ## **3️⃣ Sender Dashboard**
 
-- Create parcel delivery requests
 - Cancel parcel (if not dispatched)
 - View all created parcels and their status logs
 

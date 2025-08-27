@@ -12,7 +12,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 import { BanIcon, ShieldCheckIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import type { IError, ParcelStatus } from "@/types";
+import type { IError, ParcelStatus, ParcelTypes } from "@/types";
 import {
   useBlockParcelMutation,
   useGetParcelsQuery,
@@ -23,10 +23,20 @@ import { useAppSelector } from "@/hooks/redux";
 
 import PaginationGlobal from "../PaginationGlobal";
 import ParcelUpdateModal from "./parcelUpdateModal";
+import { SearchFilter } from "../Search";
+import { useEffect, useState } from "react";
 
 function ParcelTable() {
   const page = useAppSelector((state) => state.page.page);
-  const { data, isLoading } = useGetParcelsQuery({ page });
+  const [searchTerm, setSearchTerm] = useState<string>();
+  const [type, setType] = useState<ParcelTypes>();
+  const [status, setStatus] = useState<ParcelStatus>();
+  const { data, isLoading } = useGetParcelsQuery({
+    page,
+    searchTerm,
+    type,
+    status,
+  });
 
   const admin = useAppSelector((state) => state.auth.user);
   const statusClassMap: Record<ParcelStatus, string> = {
@@ -74,8 +84,21 @@ function ParcelTable() {
     }
   };
 
+  useEffect(() => {
+    console.log(searchTerm);
+  }, [searchTerm]);
+
   return (
     <div className="rounded-lg border shadow-sm overflow-hidden">
+      <SearchFilter
+        onSearchChange={(val) => val !== "all" && setSearchTerm(val)}
+        onTypeChange={(val) =>
+          val !== "all" ? setType(val) : setType(undefined)
+        }
+        onStatusChange={(val) =>
+          val !== "all" ? setStatus(val) : setStatus(undefined)
+        }
+      />
       <Table className="text-sm">
         <TableHeader className="bg-muted">
           <TableRow>
