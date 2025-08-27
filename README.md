@@ -1,11 +1,5 @@
 # **📌 Minimum Functional Requirements**
 
-## **4️⃣ Receiver Dashboard**
-
-- View incoming parcels
-- Confirm parcel delivery
-- View delivery history
-
 ## **6️⃣ Parcel Tracking**
 
 - Public or authenticated users can search parcels by tracking ID

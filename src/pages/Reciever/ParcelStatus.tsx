@@ -1,7 +1,10 @@
+import ReceiverParcelTable from "@/components/module/Receiver/Table";
+
 function ParcelStatus() {
   return (
     <div>
-      <h1>This is ParcelStatus component.</h1>
+      <h1>Your Parcel</h1>
+      <ReceiverParcelTable />
     </div>
   );
 }
