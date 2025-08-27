@@ -30,17 +30,19 @@ import {
 import { CalendarIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
-import type { ParcelTypes } from "@/types";
+import type { IError, ParcelTypes } from "@/types";
+import { useCreateParcelMutation } from "@/store/api/sender.api";
+import { toast } from "sonner";
 
 const createParcelSchema = z.object({
   title: z
     .string()
     .min(3, "Title must be at least 3 characters long")
     .max(50, "Title must be at most 50 characters long"),
-  weight: z.number(),
+  weight: z.number().positive("Weight must be a positive number"),
+  fee: z.number().positive("Fee must be a positive number"),
   deliveryDate: z.union([z.string(), z.date()]).optional(),
   receiverEmail: z.email(),
-  fee: z.number(),
   type: z.string(),
 });
 
@@ -56,6 +58,7 @@ const parcelTypes: ParcelTypes[] = [
 ];
 
 export default function CreateParcelForm() {
+  const [createParcel] = useCreateParcelMutation();
   const form = useForm<ParcelFormValues>({
     resolver: zodResolver(createParcelSchema),
     defaultValues: {
@@ -68,9 +71,37 @@ export default function CreateParcelForm() {
     },
   });
 
-  const onSubmit = (values: ParcelFormValues) => {
-    console.log("Submitting parcel:", values);
-    // call your API here
+  const onSubmit = async (data: ParcelFormValues) => {
+    console.log(data);
+    const t = toast.loading("Creating parcel...");
+    try {
+      const d = {
+        ...data,
+        fee: Number(data.fee),
+        weight: Number(data.weight),
+        type: data.type as ParcelTypes,
+        deliveryDate:
+          typeof data.deliveryDate === "string"
+            ? new Date(data.deliveryDate)
+            : data.deliveryDate,
+      };
+      const res = await createParcel(d).unwrap();
+      console.log(res);
+      toast.success("Parcel created successfully", {
+        id: t,
+      });
+    } catch (error) {
+      console.log(error);
+      toast.error(
+        (error as IError)?.message ||
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (error as any)?.data?.message ||
+          "Something went wrong",
+        {
+          id: t,
+        }
+      );
+    }
   };
 
   return (
@@ -165,6 +196,7 @@ export default function CreateParcelForm() {
                       type="number"
                       placeholder="Enter weight"
                       {...field}
+                      onChange={(e) => field.onChange(Number(e.target.value))}
                     />
                   </FormControl>
                   <FormMessage />
@@ -180,7 +212,12 @@ export default function CreateParcelForm() {
                 <FormItem className="flex-1">
                   <FormLabel>Fee (BDT)</FormLabel>
                   <FormControl>
-                    <Input type="number" placeholder="Enter fee" {...field} />
+                    <Input
+                      type="number"
+                      placeholder="Enter fee"
+                      {...field}
+                      onChange={(e) => field.onChange(Number(e.target.value))}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
