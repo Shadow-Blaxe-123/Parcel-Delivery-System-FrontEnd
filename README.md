@@ -12,10 +12,6 @@
 - Confirm parcel delivery
 - View delivery history
 
-## **5️⃣ Admin Dashboard**
-
-- View and manage all parcels (block/unblock, update delivery status)
-  
 ## **6️⃣ Parcel Tracking**
 
 - Each parcel has a **unique tracking ID**

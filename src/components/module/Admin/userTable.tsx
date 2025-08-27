@@ -15,21 +15,13 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
-import { useState } from "react";
 import { toast } from "sonner";
 import { BlockConfirmation } from "@/components/layout/BlockConfirmation";
+import { useAppSelector } from "@/hooks/redux";
+import PaginationGlobal from "../PaginationGlobal";
 
 function UserTable() {
-  const [page, setPage] = useState(1);
+  const page = useAppSelector((state) => state.page.page);
   const [blockUser] = useBlockUserMutation();
   const { data, isLoading } = useGetUsersQuery(
     { page },
@@ -141,30 +133,7 @@ function UserTable() {
               ))}
         </TableBody>
       </Table>
-      <Pagination>
-        <PaginationContent>
-          <PaginationItem className="cursor-pointer">
-            <PaginationPrevious onClick={() => page > 1 && setPage(page - 1)} />
-          </PaginationItem>
-
-          <PaginationItem className="cursor-pointer">
-            <PaginationLink isActive>{page}</PaginationLink>
-          </PaginationItem>
-
-          <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>
-          <PaginationItem className="cursor-pointer">
-            <PaginationNext
-              onClick={() =>
-                data?.meta?.totalPages &&
-                data.meta.totalPages > page &&
-                setPage(page + 1)
-              }
-            />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
+      {data?.meta && <PaginationGlobal totalPages={data?.meta?.totalPages} />}
     </div>
   );
 }
