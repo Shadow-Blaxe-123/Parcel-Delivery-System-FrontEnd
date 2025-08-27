@@ -32,8 +32,6 @@
   - **Charts:** Bar/pie charts showing parcel trends, delivery status distribution, and monthly shipments.  
   - **Parcel Table:** Paginated, searchable, and filterable table with actions (View, Cancel, Confirm).  
   - **Status Timeline:** Visual history of parcel updates with timestamps and notes.  
-  - **Role-Specific Views:** Sender sees their parcels, Receiver sees received parcels, Admin sees all.  
-  - **Responsive Design:** Fully responsive with consistent margins, spacing, typography, and color contrast.
 
 ## **Submission Guidelines**
 

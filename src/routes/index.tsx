@@ -12,6 +12,8 @@ import { withAuth } from "@/utils/authCheck";
 import { generateRoute } from "@/utils/generateRoute";
 import { createBrowserRouter, Navigate } from "react-router";
 import { adminDashboardRoutes } from "./admin.route";
+import CreateParcel from "@/pages/Sender/CreateParcel";
+import { senderDashboardRoutes } from "./sender.route";
 
 export const router = createBrowserRouter([
   {
@@ -61,8 +63,9 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Navigate to="/sender/createParcel" />,
+        Component: CreateParcel,
       },
+      ...generateRoute(senderDashboardRoutes),
     ],
   },
   {
