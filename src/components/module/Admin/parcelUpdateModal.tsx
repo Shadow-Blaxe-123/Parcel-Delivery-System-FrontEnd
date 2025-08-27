@@ -47,19 +47,22 @@ import { CalendarIcon, PencilIcon } from "lucide-react";
 import { useUpdateParelMutation } from "@/store/api/admin.api";
 import type { IError, IParcel, ParcelStatus } from "@/types";
 import { toast } from "sonner";
+import { useAppSelector } from "@/hooks/redux";
 
 function ParcelUpdateModal({ parcel }: { parcel: IParcel }) {
+  const user = useAppSelector((state) => state.auth.user);
   const [updateParcel] = useUpdateParelMutation();
   const [trackingId, setTrackingId] = useState<string>("");
 
   const form = useForm<z.infer<typeof updateAdminParcelSchema>>({
     resolver: zodResolver(updateAdminParcelSchema),
     defaultValues: {
-      trackingId: "",
-      status: "",
+      deliveryDate: parcel.deliveryDate,
+      trackingId: parcel.trackingId,
+      status: parcel.status,
       statusLog: {
-        location: "",
-        notes: "",
+        location: user?.address,
+        notes: `Parcel updated by ${user?.name}, who is the ${user?.role}`,
       },
     },
   });

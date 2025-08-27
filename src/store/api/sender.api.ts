@@ -11,7 +11,7 @@ export const senderApi = baseApi.injectEndpoints({
       }),
       providesTags: ["Parcel"],
     }),
-    createParcel: builder.mutation<IResponse<IParcel>, IParcel>({
+    createParcel: builder.mutation<IResponse<IParcel>, Partial<IParcel>>({
       query: (data) => ({
         url: "/parcel/create",
         method: "POST",
@@ -21,4 +21,4 @@ export const senderApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetAllMyParcelsQuery } = senderApi;
+export const { useGetAllMyParcelsQuery, useCreateParcelMutation } = senderApi;
