@@ -5,6 +5,7 @@ import { authSlice } from "./slice/auth.slice";
 
 import storage from "redux-persist/lib/storage"; // uses localStorage
 import { persistStore, persistReducer } from "redux-persist";
+import { pageSlice } from "./slice/page.slice";
 
 // Config for redux-persist
 const persistConfig = {
@@ -17,6 +18,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   [baseApi.reducerPath]: baseApi.reducer,
   auth: authSlice.reducer,
+  page: pageSlice.reducer,
 });
 
 // Wrap with persistReducer
