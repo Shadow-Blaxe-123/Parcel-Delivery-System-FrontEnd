@@ -120,6 +120,9 @@ function ParcelTable() {
                   <TableCell>
                     <Skeleton className="h-8 w-8 rounded-md" />
                   </TableCell>
+                  <TableCell>
+                    <Skeleton className="h-8 w-8 rounded-md" />
+                  </TableCell>
                   <TableCell className="text-right">
                     <Skeleton className="h-8 w-8 rounded-md" />
                   </TableCell>

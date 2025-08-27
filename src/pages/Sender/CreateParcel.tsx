@@ -1,7 +1,9 @@
+import ParcelTable from "@/components/module/sender/Parceltable";
+
 function CreateParcel() {
   return (
     <div>
-      <h1>This is CreateParcel component.</h1>
+      <ParcelTable />
     </div>
   );
 }

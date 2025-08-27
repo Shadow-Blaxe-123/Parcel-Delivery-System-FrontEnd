@@ -15,12 +15,23 @@ import { Link } from "react-router";
 import Logo from "@/assets/Logo";
 import type { IDashboard } from "@/types";
 import { adminDashboardRoutes } from "@/routes/admin.route";
-
-// This is sample data.
-
-const navMain: IDashboard[] = adminDashboardRoutes;
+import { useAppSelector } from "@/hooks/redux";
+import { senderDashboardRoutes } from "@/routes/sender.route";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const user = useAppSelector((state) => state.auth.user);
+  let navMain: IDashboard[] = [];
+  switch (user?.role) {
+    case "ADMIN":
+      navMain = adminDashboardRoutes;
+      break;
+    case "SENDER":
+      navMain = senderDashboardRoutes;
+      break;
+
+    default:
+      break;
+  }
   return (
     <Sidebar {...props}>
       <SidebarHeader>
