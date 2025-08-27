@@ -15,7 +15,8 @@ export type ParcelStatus =
   | "Dispatched"
   | "In Transit"
   | "Delivered"
-  | "Cancelled";
+  | "Cancelled"
+  | "Blocked";
 
 export interface ParcelStatusLog {
   // Auto from service layer

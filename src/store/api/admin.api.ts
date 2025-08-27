@@ -1,4 +1,4 @@
-import type { IParcel, IResponse, IUser } from "@/types";
+import type { IParcel, IResponse, IUser, ParcelStatus } from "@/types";
 import { baseApi } from "./baseApi";
 
 export const adminApi = baseApi.injectEndpoints({
@@ -32,13 +32,27 @@ export const adminApi = baseApi.injectEndpoints({
     }),
     blockParcel: builder.mutation<
       IResponse<IParcel>,
-      { trackingId: string; isBlocked: boolean }
+      {
+        trackingId: string;
+        isBlocked: boolean;
+        address: string;
+        status: ParcelStatus;
+      }
     >({
-      query: ({ trackingId, isBlocked }) => ({
-        url: `/parcel/update/${trackingId}`,
+      query: ({ trackingId, isBlocked, status, address }) => ({
+        url: `/parcel/update/admin/${trackingId}`,
         method: "PATCH",
-        body: { isBlocked: isBlocked },
+        body: {
+          isBlocked: isBlocked,
+          status: status,
+          statusLog: {
+            location: address,
+            status: status,
+            notes: "Parcel blocked by an admin",
+          },
+        },
       }),
+      invalidatesTags: ["Parcel"],
     }),
   }),
 });
